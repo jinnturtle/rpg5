@@ -2,7 +2,8 @@
 #define WORLD_HPP
 
 enum Direction {
-    NORTH = 0,
+    NONE = 0,
+    NORTH,
     EAST,
     SOUTH,
     WEST

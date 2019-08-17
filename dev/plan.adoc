@@ -6,21 +6,22 @@ milestone, the more susceptible to change it is, but it should represent the
 general idea.
 
 === Prototype 1
-* [ ] wall collisions
-* [ ] simple enemy
+* [x] wall collisions
+* [x] simple enemy
 
 === Prototype 2
-* enemy AI
+* [ ] basic (homming) enemy AI
 
 === Soon
-* level generation
+* one type of level generation
+* enemy AI with A* pathfinding
 * doors
 * chests
 * more enemies
 * going deeper (stairs down/up to other levels)
 
 == Unsorted Features
-This is subject to changing completely, as it is a result of brainstorming
+This is subject to changing completely, as it is a result of brainstorming.
 
 * doors
 * barring doors, bashing down doors, enemies bash down doors

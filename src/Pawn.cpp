@@ -1,8 +1,14 @@
 #include "Pawn.hpp"
 
-Pawn::Pawn(int x, int y)
-: x{x}
+Pawn::Pawn(const std::string& name, int x, int y, Pawn_controller contr,
+           int hp, int hp_max, int dmg)
+: name{name}
+, controller{contr}
+, x{x}
 , y{y}
+, hp{hp}
+, hp_max{hp_max}
+, dmg{dmg}
 , map{nullptr}
 {}
 
@@ -21,10 +27,17 @@ void Pawn::move(Direction dir)
     }
 
     // see if the target coordinates are passable, and move there if so
-    if(this->map->get_tile(tgt_x, tgt_y)->get_type() != WALL) {
+    Tile* tgt_tile = this->map->get_tile(tgt_x, tgt_y);
+    if(tgt_tile == nullptr) {return;}
+    
+    if(tgt_tile->get_type() != WALL) {
         this->x = tgt_x;
         this->y = tgt_y;
     }
 }
 
-void Pawn::assign_map(Level* map) {this->map = map;}
+void Pawn::assign_map(Floor_map* map) {this->map = map;}
+
+void Pawn::attack(Pawn* enemy) {enemy->take_damage(this->dmg);}
+
+void Pawn::take_damage(int dmg) {this->hp -= dmg;}

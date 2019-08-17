@@ -7,12 +7,13 @@
 
 #include "Tile.hpp"
 
-class Level {
+class Floor_map {
 public:
-    Level(int w, const std::string& data);
-    virtual ~Level(){};
+    Floor_map();
+    virtual ~Floor_map(){};
 
     Tile* get_tile(int x, int y);
+    void generate_test_level();
 
 private:
     std::vector<Tile*> tiles;

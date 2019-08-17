@@ -7,27 +7,43 @@ INCLUDE = -I src
 LIBS = -lncurses
 OBJ_DIR = obj
 _OBJ = main.o \
-	   Level.o \
+	   Floor_map.o \
 	   Pawn.o \
 	   Viewport.o \
-	   Tile.o
+	   Tile.o \
+	   Data_master.o \
+	   Pawn_statsview.o \
+	   Ui.o
 OBJ = $(patsubst %, $(OBJ_DIR)/%, $(_OBJ))
 MAKEFILE = makefile
 
-all: $(MAKEFILE) $(OBJ_DIR) $(NAME)
+DEPDIR := .deps
+DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d
+
+all: $(MAKEFILE) $(OBJ_DIR) $(DEPDIR) $(NAME)
 
 $(OBJ_DIR):
 	mkdir -p $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(DEPDIR)/%.d | $(DEPDIR)
 	@echo "CXX $@"
-	@$(CXX) $(INCLUDE) -c -o $@ $<
+	@$(CXX) $(DEPFLAGS) -o $@ $< $(INCLUDE) -c
 
 $(NAME): $(OBJ) $(MAKEFILE)
 	@echo "LD $@"
 	@$(LD) -o $@ $(OBJ) $(LIBS)
 
+# cleaning
 .PHONY: clean
 clean:
 	@rm -rfv $(OBJ_DIR)
 	@rm -fv $(NAME)
+
+# dependency files
+$(DEPDIR):
+	mkdir -p $@
+	
+DEPFILES := $(_OBJ:%.o=$(DEPDIR)/%.d)
+$(DEPFILES):
+
+include $(wildcard $(DEPFILES))

@@ -4,3 +4,6 @@ game
 
 # generated helper files
 tags
+
+# dependency files
+.deps/*.d

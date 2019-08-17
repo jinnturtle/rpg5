@@ -1,35 +1,65 @@
 #include "Viewport.hpp"
 
-Viewport::Viewport()
-: level{nullptr}
+Viewport::Viewport(int x, int y, int w, int h)
+: x{x}
+, y{y}
+, w{w}
+, h{h}
+, map_x{0}
+, map_y{0}
+, dm{nullptr}
 {}
 
-void Viewport::attach_level(Level* level) {this->level = level;}
-void Viewport::attach_player(Pawn* player) {this->player = player;}
+void Viewport::attach_dm(Data_master* dm) {this->dm = dm;}
 
 void Viewport::render_level()
 {
-    for(int y {0}; y < this->level->h; ++y) {
-        for(int x {0}; x < this->level->w; ++x) {
-            Tile_type tile_type = this->level->get_tile(x, y)->get_type();
+    for(int y {this->map_y}; y < this->dm->map->h; ++y) {
+        for(int x {this->map_x}; x < this->dm->map->w; ++x) {
+            Tile_type tile_type = this->dm->map->get_tile(x, y)->get_type();
 
+            // determine graphics
             char tile_gfx;
             switch(tile_type) {
                 case FLOOR: tile_gfx = '.'; break;
                 case WALL: tile_gfx = '#'; break;
             }
 
-            mvaddch(y, x, tile_gfx);
+            this->addch_at(x, y, tile_gfx);
         }
     }
 }
 
-void Viewport::render_player()
+void Viewport::render_pawns()
 {
-    if(
-        this->player->x >= 0 && this->player->x < this->level->w
-        && this->player->y >= 0 && this->player->y < this->level->h
-    ) {
-        mvaddch(this->player->y, this->player->x, '@');
+    for(auto& pawn : this->dm->pawns) {
+        char pawn_gfx = '?';
+        
+        if(pawn->controller == PLAYER) {
+            pawn_gfx = '@';
+        }
+        
+        if(
+            pawn->x >= 0 && pawn->x < this->dm->map->w
+            && pawn->y >= 0 && pawn->y < this->dm->map->h
+        ) {
+            this->addch_at(pawn->x, pawn->y, pawn_gfx);
+        }
     }
+}
+
+void Viewport::addch_at(int x, int y, char glyph)
+{
+    int onscreen_x = x + this->x;
+    int onscreen_y = y + this->y;
+    
+    if(onscreen_x < this->x + this->w && onscreen_y < this->y + this->h) {
+        mvaddch(onscreen_y, onscreen_x, glyph);
+    }
+}
+
+void Viewport::render()
+{
+    this->render_level();
+    this->render_pawns();
 }

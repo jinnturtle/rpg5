@@ -1,74 +1,90 @@
 //std lib
 #include <vector>
 #include <string>
+#include <sstream>
 #include <stdexcept>
 
 //3rd party libs
 #include <ncurses.h>
 
 //homebrew
-#include "Level.hpp"
-#include "Pawn.hpp"
-#include "Viewport.hpp"
+#include "Data_master.hpp"
+#include "Ui.hpp"
 
+std::string gen_version();
 void init_ncurses();
 void deinit_ncurses();
 
 int main() {
     init_ncurses();
 
-    Level level {
-        .w = 60,
-        .data = {
-            "............................................................"
-            "............................................................"
-            "............................................................"
-            "............................................................"
-            "............................................................"
-            "..................#########................................."
-            "..................#.......#................................."
-            "..................#.......#................................."
-            "..................#.......#................................."
-            "..................#........................................."
-            "..................#.......#................................."
-            "..................#.......#................................."
-            "..................#.......#................................."
-            "..................#########................................."
-            "............................................................"
-            "............................................................"
-            "............................................................"
-            "............................................................"
-            "............................................................"
-            "............................................................"}
-    };
+    Floor_map level;
+    level.generate_test_level();
 
-    Pawn player {.x = 5, .y = 5};
+    Pawn player("player", 5, 5, PLAYER);
     player.assign_map(&level);
+    Pawn mob("mob", 10, 10, AI_NONE);
+    mob.assign_map(&level);
+    
+    Data_master dm;
+    dm.add_pawn(&player);
+    dm.add_pawn(&mob);
+    dm.set_floor_map(&level);
 
-    Viewport viewport;
-    viewport.attach_level(&level);
-    viewport.attach_player(&player);
-
+    Viewport viewport(0, 0, 80, 20);
+    viewport.attach_dm(&dm);
+    Pawn_statsview player_statsview(0, 20, &player);
+    Pawn_statsview mob_statsview(0, 21, &mob);
+    
+    Ui ui(&viewport, &player_statsview);
+    
     // game loop
     int cmd {0};
     while(cmd != 'q') {
         // process movement input
+        Direction move_direction {NONE};
         switch(cmd) {
-            case 'h': player.move(WEST); break;
-            case 'j': player.move(SOUTH); break;
-            case 'k': player.move(NORTH); break;
-            case 'l': player.move(EAST); break;
+            case 'h': move_direction = WEST; break;
+            case 'j': move_direction = SOUTH; break;
+            case 'k': move_direction = NORTH; break;
+            case 'l': move_direction = EAST; break;
+            
+//             case 'w': --viewport.y; break;
+//             case 'a': --viewport.x; break;
+//             case 's': ++viewport.y; break;
+//             case 'd': ++viewport.x; break;
+//             case 'S': --viewport.h; break;
+//             case 'A': --viewport.w; break;
+//             case 'W': ++viewport.h; break;
+//             case 'D': ++viewport.w; break;
             default: break;
         }
+        
+        dm.move_pawns(move_direction);
 
-        viewport.render_level();
-        viewport.render_player();
+        ui.render();
+        mob_statsview.render();
 
+        mvprintw(getmaxy(stdscr) - 1, 0, gen_version().c_str());
         cmd = getch();
+        clear();
     }
 
     deinit_ncurses();
     return 1;
+}
+
+std::string gen_version()
+{
+    unsigned maj {0};
+    unsigned min {1};
+    unsigned fix {0};
+    std::string name("prototype");
+    
+    std::stringstream ssbuf;
+    ssbuf << "v" << maj << "." << min << "." << fix << "-" << name;
+    
+    return ssbuf.str();
 }
 
 void init_ncurses()

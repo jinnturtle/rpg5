@@ -43,6 +43,7 @@ int main() {
     };
 
     Pawn player {.x = 5, .y = 5};
+    player.assign_map(&level);
 
     Viewport viewport;
     viewport.attach_level(&level);

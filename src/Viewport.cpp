@@ -11,7 +11,15 @@ void Viewport::render_level()
 {
     for(int y {0}; y < this->level->h; ++y) {
         for(int x {0}; x < this->level->w; ++x) {
-            mvaddch(y, x, this->level->data[x + (y * this->level->w)]);
+            Tile_type tile_type = this->level->get_tile(x, y)->get_type();
+
+            char tile_gfx;
+            switch(tile_type) {
+                case FLOOR: tile_gfx = '.'; break;
+                case WALL: tile_gfx = '#'; break;
+            }
+
+            mvaddch(y, x, tile_gfx);
         }
     }
 }

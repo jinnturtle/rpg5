@@ -9,7 +9,8 @@ OBJ_DIR = obj
 _OBJ = main.o \
 	   Level.o \
 	   Pawn.o \
-	   Viewport.o
+	   Viewport.o \
+	   Tile.o
 OBJ = $(patsubst %, $(OBJ_DIR)/%, $(_OBJ))
 MAKEFILE = makefile
 

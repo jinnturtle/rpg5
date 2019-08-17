@@ -1,2 +1,6 @@
-tags
+# compiled files
+obj/*
 game
+
+# generated helper files
+tags

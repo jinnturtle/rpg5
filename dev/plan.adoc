@@ -1,0 +1,53 @@
+= Dev Plan
+
+== Work-plan
+This should contain a couple of planned milestones, the further away the
+milestone, the more susceptible to change it is, but it should represent the
+general idea.
+
+=== Prototype 1
+* wall collisions
+* simple enemy
+
+=== Prototype 1
+* enemy AI
+
+=== Soon
+* level generation
+* doors
+* chests
+* more enemies
+* going deeper (stairs down/up to other levels)
+
+== Unsorted Features
+This is subject to changing completely, as it is a result of brainstorming
+
+* doors
+* several types of levels (e.g. corridor-connected rooms, long tunnels, rooms
+  with almost no tunnels, caves, caves with underground rivers & chasms &
+  bridges, etc)
+* A* path-finding
+* enemy stat randomization within bounds
+* chests and other containers
+* loot (free-lying, in chests)
+* logical (kind-of) enemy loot drops
+* body-parts and organs based health system
+* bleeding
+* damage types: blunt, cutting, piercing
+* more damage types: burn, heat, cold, poison, corrosive, compression,
+  decompression, suffocation
+* exotic damage types: chaos, arcane, vita
+* magic
+** spells as a combination of certain effects, which translate to casting,
+   scribing, alchemy costs
+** one-use (consumable) scrolls, potions and balms that have an effect of a
+   certain spell (*benefit of potions* - non-magical users can achieve an effect
+   of a spell (might be limited - i.e. certain spells might not be potion-able),
+   but costs ingredients and a potent spell-caster to make; *benefit of scrolls*
+   weaker magic users can achieve more powerful spells (i.e. spell costs less to
+   cast), but has to be made by a very potent caster as consumes a lot of mana and
+   time)
+* progression system: skills progress as they are used, books, trainers
+* ranged weapons
+* different/swappable ranged weapon ammunition (e.g. arrow, poison arrow,
+  various magic arrows, bullets, incendiary b, explosive b, AP bullets, etc)

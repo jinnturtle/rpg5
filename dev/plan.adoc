@@ -6,10 +6,10 @@ milestone, the more susceptible to change it is, but it should represent the
 general idea.
 
 === Prototype 1
-* wall collisions
-* simple enemy
+* [ ] wall collisions
+* [ ] simple enemy
 
-=== Prototype 1
+=== Prototype 2
 * enemy AI
 
 === Soon
@@ -23,6 +23,15 @@ general idea.
 This is subject to changing completely, as it is a result of brainstorming
 
 * doors
+* barring doors, bashing down doors, enemies bash down doors
+* locking doors, picking locks (on doors and chests and etc.)
+* secret doors
+* event log at the bottom and bigger somewhere else (e.g. _"goblin pokes at you
+  with his spear, piercing your arm. Blood trickles down from the puncture
+  wound"_, _"you swing at the goblin with your axe, separating his head clean off
+  his shoulders."_, _"Goblin collapses in a pool of black-brown blood"_)
+** coloured text in the event log
+* flavour text
 * several types of levels (e.g. corridor-connected rooms, long tunnels, rooms
   with almost no tunnels, caves, caves with underground rivers & chasms &
   bridges, etc)

@@ -11,10 +11,20 @@ general idea.
 
 === Prototype 2
 * [x] basic (homming) enemy AI
+* [ ] remove map calls from Pawn class
+* [ ] gameover screen on player death
 
-=== Soon
-* one type of level generation
+=== Prototype 3
+* [ ] str-based damage
+* [ ] diceroll for damage calculation
+
+=== Very soon
+* creature types (2 for now -- human and mob)
+* random stats for spawned mobs (within mob type boundaries)
 * enemy AI with A* pathfinding
+
+=== Quite soon
+* one type of level generation
 * doors
 * chests
 * more enemies

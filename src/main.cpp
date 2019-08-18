@@ -77,12 +77,15 @@ int main() {
 std::string gen_version()
 {
     unsigned maj {0};
-    unsigned min {1};
+    unsigned min {2};
     unsigned fix {0};
-    std::string name("prototype");
+    std::string name("prototype2");
+    bool wip {true};
+
+    std::string suffix((wip)? "-WIP" : "");
     
     std::stringstream ssbuf;
-    ssbuf << "v" << maj << "." << min << "." << fix << "-" << name;
+    ssbuf << "v" << maj << "." << min << "." << fix << "-" << name << suffix;
     
     return ssbuf.str();
 }

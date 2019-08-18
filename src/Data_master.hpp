@@ -12,11 +12,14 @@ public:
     void move_pawns(Direction player_input);
     void add_pawn(Pawn* pawn);
     void set_floor_map(Floor_map* map);
+    void set_player(Pawn* pawn);
     
 private:
     std::vector<Pawn*> pawns;
     Floor_map* map;
 
+    void player_take_turn(Pawn* pawn, Direction player_input);
+    void ai_basic_take_turn(Pawn* pawn);
     Pawn* get_pawn_at(int x, int y);
     void update_pawns();
     

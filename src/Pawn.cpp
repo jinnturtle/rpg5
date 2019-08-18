@@ -1,15 +1,18 @@
 #include "Pawn.hpp"
 
-Pawn::Pawn(const std::string& name, int x, int y, Pawn_controller contr,
+Pawn::Pawn(const std::string& name, int x, int y,
+           Pawn_controller contr, int team,
            int hp, int hp_max, int dmg)
 : name{name}
 , controller{contr}
+, team{team}
 , x{x}
 , y{y}
 , hp{hp}
 , hp_max{hp_max}
 , dmg{dmg}
 , map{nullptr}
+, stats{.per = 5, .str = 1}
 {}
 
 void Pawn::move(Direction dir)

@@ -13,8 +13,14 @@ enum Pawn_controller {
 };
 
 class Pawn {
+    struct Stats {
+        int per;
+        int str;
+    };
+    
 public:
-    Pawn(const std::string& name, int x, int y, Pawn_controller contr,
+    Pawn(const std::string& name, int x, int y,
+         Pawn_controller contr, int team,
          int hp = 10, int hp_max = 10, int dmg = 1);
     virtual ~Pawn(){};
 
@@ -26,10 +32,12 @@ public:
 private:
     std::string name;
     Pawn_controller controller;
+    int team;
     int x, y;
     int hp, hp_max;
-    int dmg;
-    Floor_map* map;
+    int dmg; //obsolete, should calculate based on str + weapon + effects, etc
+    Floor_map* map; // this should not be here
+    Stats stats;
 
     friend class Viewport;
     friend class Data_master;

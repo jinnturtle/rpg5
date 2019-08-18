@@ -19,6 +19,7 @@ void Pawn_statsview::render()
     
     std::stringstream linebuff;
     
-    linebuff << this->pawn->name << "} HP: " << this->pawn->hp << "/" << this->pawn->hp_max;
+    linebuff << this->pawn->name << "> "
+             << "HP: " << this->pawn->hp << "/" << this->pawn->hp_max;
     mvprintw(pos_y, pos_x, linebuff.str().c_str());
 }

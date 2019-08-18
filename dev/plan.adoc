@@ -10,7 +10,7 @@ general idea.
 * [x] simple enemy
 
 === Prototype 2
-* [ ] basic (homming) enemy AI
+* [x] basic (homming) enemy AI
 
 === Soon
 * one type of level generation

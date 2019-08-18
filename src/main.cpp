@@ -21,9 +21,9 @@ int main() {
     Floor_map level;
     level.generate_test_level();
 
-    Pawn player("player", 5, 5, PLAYER);
+    Pawn player("player", 5, 5, PLAYER, 0);
     player.assign_map(&level);
-    Pawn mob("mob", 10, 10, AI_NONE);
+    Pawn mob("mob", 10, 10, AI_BASIC, 1);
     mob.assign_map(&level);
     
     Data_master dm;

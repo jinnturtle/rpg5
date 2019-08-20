@@ -12,6 +12,7 @@
 #include "Ui.hpp"
 
 std::string gen_version();
+void gameover();
 void init_ncurses();
 void deinit_ncurses();
 
@@ -22,9 +23,7 @@ int main() {
     level.generate_test_level();
 
     Pawn player("player", 5, 5, PLAYER, 0);
-    player.assign_map(&level);
     Pawn mob("mob", 10, 10, AI_BASIC, 1);
-    mob.assign_map(&level);
     
     Data_master dm;
     dm.add_pawn(&player);
@@ -61,6 +60,10 @@ int main() {
         }
         
         dm.move_pawns(move_direction);
+        if(dm.get_gameover()) {
+            gameover();
+            break;
+        }
 
         ui.render();
         mob_statsview.render();
@@ -76,18 +79,34 @@ int main() {
 
 std::string gen_version()
 {
+    std::string name("prototype1");
     unsigned maj {0};
+    unsigned med {0};
     unsigned min {2};
-    unsigned fix {0};
-    std::string name("prototype2");
-    bool wip {true};
+    bool wip {false};
 
     std::string suffix((wip)? "-WIP" : "");
     
     std::stringstream ssbuf;
-    ssbuf << "v" << maj << "." << min << "." << fix << "-" << name << suffix;
+    ssbuf << "v" << maj << "." << med << "." << min << "-" << name << suffix;
     
     return ssbuf.str();
+}
+
+void gameover()
+{
+    std::stringstream buf;
+    
+    buf << "Alas our hero has fallen." << std::endl
+        << "This draws our story to a close." << std::endl
+        << std::endl
+        << "But there are more stroies." << std::endl;
+        
+    mvprintw(0, 0, buf.str().c_str());
+    
+    // wait for player input
+    printw("\n\npress any key...");
+    getch();
 }
 
 void init_ncurses()

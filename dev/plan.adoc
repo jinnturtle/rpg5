@@ -5,18 +5,13 @@ This should contain a couple of planned milestones, the further away the
 milestone, the more susceptible to change it is, but it should represent the
 general idea.
 
-=== Prototype 1
-* [x] wall collisions
-* [x] simple enemy
-
-=== Prototype 2
-* [x] basic (homming) enemy AI
-* [ ] remove map calls from Pawn class
-* [ ] gameover screen on player death
-
-=== Prototype 3
+=== v0.0.3 prototype1
 * [ ] str-based damage
 * [ ] diceroll for damage calculation
+
+=== v0.0.4 prototype1
+* [ ] a message/event log where flavour text, combat messages and similar things will be stored. (e.g. _"goblin pokes at you with his spear, piercing your arm. Blood trickles down from the puncture wound"_, _"you swing at the goblin with your axe, separating his head clean off his shoulders."_, _"Goblin collapses in a pool of black-brown blood"_)
+* [ ] the few most recent lines of this log should be visible on the main adventure screen
 
 === Very soon
 * creature types (2 for now -- human and mob)
@@ -30,22 +25,26 @@ general idea.
 * more enemies
 * going deeper (stairs down/up to other levels)
 
+=== Planning rules of thumb
+All the changes should be cathegorhised into small iterations.
+Each small iteration should take one or two sittings to complete (i.e. 2-4 hours as I'm doing this on my free time). Completion of each of these iterations should vacilitate a minor version bump.
+The small iterations should be grouped into releases, which would usually facilitate a medium version bump.
+
+Version names::
+The development process shou go through a few prototypes (i.e. "prototypeX" (X being a number)) before reaching the "pre-alpha" and/or "alpha" stage, then hopefully "pre-beta", "beta" and so on until we reach completion, after which the names will be lifted (or changed into release names). Additional releases after completion will be `v1.X.X`.
+
+The definition of "complete" will be decided at a later date.
+
 == Unsorted Features
-This is subject to changing completely, as it is a result of brainstorming.
+This is subject to chane completely, as it is a result of brainstorming.
 
 * doors
 * barring doors, bashing down doors, enemies bash down doors
 * locking doors, picking locks (on doors and chests and etc.)
 * secret doors
-* event log at the bottom and bigger somewhere else (e.g. _"goblin pokes at you
-  with his spear, piercing your arm. Blood trickles down from the puncture
-  wound"_, _"you swing at the goblin with your axe, separating his head clean off
-  his shoulders."_, _"Goblin collapses in a pool of black-brown blood"_)
 ** coloured text in the event log
 * flavour text
-* several types of levels (e.g. corridor-connected rooms, long tunnels, rooms
-  with almost no tunnels, caves, caves with underground rivers & chasms &
-  bridges, etc)
+* several types of levels (e.g. corridor-connected rooms, long tunnels, rooms with almost no tunnels, caves, caves with underground rivers & chasms & bridges, etc)
 * A* path-finding
 * enemy stat randomization within bounds
 * chests and other containers
@@ -54,20 +53,29 @@ This is subject to changing completely, as it is a result of brainstorming.
 * body-parts and organs based health system
 * bleeding
 * damage types: blunt, cutting, piercing
-* more damage types: burn, heat, cold, poison, corrosive, compression,
-  decompression, suffocation
+* more damage types: burn, heat, cold, poison, corrosive, compression, decompression, suffocation
 * exotic damage types: chaos, arcane, vita
 * magic
-** spells as a combination of certain effects, which translate to casting,
-   scribing, alchemy costs
-** one-use (consumable) scrolls, potions and balms that have an effect of a
-   certain spell (*benefit of potions* - non-magical users can achieve an effect
-   of a spell (might be limited - i.e. certain spells might not be potion-able),
-   but costs ingredients and a potent spell-caster to make; *benefit of scrolls*
-   weaker magic users can achieve more powerful spells (i.e. spell costs less to
-   cast), but has to be made by a very potent caster as consumes a lot of mana and
-   time)
+** spells as a combination of certain effects, which translate to casting, scribing, alchemy costs
+** one-use (consumable) scrolls, potions and balms that have an effect of a certain spell (*benefit of potions* - non-magical users can achieve an effect of a spell (might be limited - i.e. certain spells might not be potion-able), but costs ingredients and a potent spell-caster to make; *benefit of scrolls* weaker magic users can achieve more powerful spells (i.e. spell costs less to cast), but has to be made by a very potent caster as consumes a lot of mana and time)
 * progression system: skills progress as they are used, books, trainers
 * ranged weapons
-* different/swappable ranged weapon ammunition (e.g. arrow, poison arrow,
-  various magic arrows, bullets, incendiary b, explosive b, AP bullets, etc)
+* different/swappable ranged weapon ammunition (e.g. arrow, poison arrow, various magic arrows, bullets, incendiary b, explosive b, AP bullets, etc)
+* consumables and crafting materials can be acquired from flora, dropped by mobs
+** cave mushrooms
+*** red amathea - health potions
+*** green amathea - poison (can be used in a balm and applied on arrows, weapons)
+*** blue amathea - mana, poison, water breathing
+*** black amathea - darkness, stealth, poison
+*** ghost amathea - stealth, walking through walls, health/vitae drain
+
+== Changelog
+
+=== v0.0.1 prototype1
+* [x] wall collisions
+* [x] simple enemy
+
+=== v0.0.2 prototype1
+* [x] basic (homming) enemy AI
+* [x] remove map calls from Pawn class
+* [x] gameover screen on player death

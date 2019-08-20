@@ -4,7 +4,6 @@
 #include <string>
 
 #include "world.hpp"
-#include "Floor_map.hpp"
 
 enum Pawn_controller {
     PLAYER = 0,
@@ -25,7 +24,6 @@ public:
     virtual ~Pawn(){};
 
     void move(Direction dir);
-    void assign_map(Floor_map* map);
     void take_damage(int dmg);
     void attack(Pawn* enemy);
     
@@ -36,7 +34,6 @@ private:
     int x, y;
     int hp, hp_max;
     int dmg; //obsolete, should calculate based on str + weapon + effects, etc
-    Floor_map* map; // this should not be here
     Stats stats;
 
     friend class Viewport;

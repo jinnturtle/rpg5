@@ -26,26 +26,19 @@ void Data_master::set_floor_map(Floor_map* map)
     this->map = map;
 }
 
+bool Data_master::get_gameover()
+{
+    for(auto& pawn : this->pawns) {
+        if(pawn->controller == PLAYER) {return false;}
+    }
+    
+    return true;
+}
+
 void Data_master::player_take_turn(Pawn* pawn, Direction player_input)
 {
     if(pawn->controller == PLAYER) {
-        int tgt_x = pawn->x;
-        int tgt_y = pawn->y;
-        switch(player_input) {
-            case NORTH: --tgt_y; break;
-            case EAST: ++tgt_x; break;
-            case SOUTH: ++tgt_y; break;
-            case WEST: --tgt_x; break;
-            default: break;
-        }
-        
-        Pawn* tgt_pawn = this->get_pawn_at(tgt_x, tgt_y);
-        if(tgt_pawn) {
-            pawn->attack(tgt_pawn);
-            return;
-        }
-        
-        pawn->move(player_input);
+        this->move_pawn(pawn, player_input);
     }
 }
 
@@ -67,12 +60,8 @@ void Data_master::ai_basic_take_turn(Pawn* pawn)
             closest_enemy = other_pawn;
         }
     }
-    //decide movement direction to get closer if were not close enough
-    if(closest_dist <= 1) {
-        pawn->attack(closest_enemy);
-        return;
-    }
     
+    //decide movement direction to get closer if were not close enough
     Direction direction{NONE};
     if(closest_enemy) {
         if(closest_enemy->x > pawn->x) {direction = EAST;}
@@ -80,7 +69,7 @@ void Data_master::ai_basic_take_turn(Pawn* pawn)
         else if(closest_enemy->y < pawn->y) {direction = NORTH;}
         else if(closest_enemy->y > pawn->y) {direction = SOUTH;}
     }
-    pawn->move(direction);
+    this->move_pawn(pawn, direction);
 }
 
 Pawn* Data_master::get_pawn_at(int x, int y)
@@ -102,5 +91,42 @@ void Data_master::update_pawns()
             this->pawns[i] = this->pawns.back();
             this->pawns.pop_back();
         }
+    }
+}
+
+void Data_master::move_pawn(Pawn* pawn, Direction direction)
+{
+    int tgt_x = pawn->x;
+    int tgt_y = pawn->y;
+    
+    switch(direction) {
+        case NORTH: --tgt_y; break;
+        case EAST: ++tgt_x; break;
+        case SOUTH: ++tgt_y; break;
+        case WEST: --tgt_x; break;
+        default: break;
+    }
+    
+    this->move_pawn(pawn, tgt_x, tgt_y);
+}
+
+void Data_master::move_pawn(Pawn* pawn, int x, int y)
+{
+    // check if there is a creature at target location, attack if so
+    Pawn* tgt_pawn = this->get_pawn_at(x, y);
+    if(tgt_pawn) {
+        if(tgt_pawn != pawn && tgt_pawn->team != pawn->team) {
+            pawn->attack(tgt_pawn);
+            return;
+        }
+    }
+    
+    // see if the target coordinates are passable, and move there if so
+    Tile* tgt_tile = this->map->get_tile(x, y);
+    if(tgt_tile == nullptr) {return;}
+    
+    if(tgt_tile->get_type() != WALL) {
+        pawn->x = x;
+        pawn->y = y;
     }
 }

@@ -11,35 +11,20 @@ Pawn::Pawn(const std::string& name, int x, int y,
 , hp{hp}
 , hp_max{hp_max}
 , dmg{dmg}
-, map{nullptr}
 , stats{.per = 5, .str = 1}
 {}
 
 void Pawn::move(Direction dir)
 {
-    int tgt_x = this->x;
-    int tgt_y = this->y;
-
     // set target coordinates (where we want to move to)
     switch(dir) {
-        case NORTH: --tgt_y; break;
-        case EAST:  ++tgt_x; break;
-        case SOUTH: ++tgt_y; break;
-        case WEST:  --tgt_x; break;
+        case NORTH: --this->y; break;
+        case EAST:  ++this->x; break;
+        case SOUTH: ++this->y; break;
+        case WEST:  --this->x; break;
         default: break;
     }
-
-    // see if the target coordinates are passable, and move there if so
-    Tile* tgt_tile = this->map->get_tile(tgt_x, tgt_y);
-    if(tgt_tile == nullptr) {return;}
-    
-    if(tgt_tile->get_type() != WALL) {
-        this->x = tgt_x;
-        this->y = tgt_y;
-    }
 }
-
-void Pawn::assign_map(Floor_map* map) {this->map = map;}
 
 void Pawn::attack(Pawn* enemy) {enemy->take_damage(this->dmg);}
 

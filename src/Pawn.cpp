@@ -28,14 +28,18 @@ void Pawn::move(Direction dir)
     }
 }
 
+void Pawn::take_damage(int dmg) {this->hp -= dmg;}
+
 std::string Pawn::attack(Pawn* enemy) {
+    if(this->check_dead()) {return "";}
+    
     std::stringstream msg;
     msg << "The " << this->name << " attacks " << enemy->name
-        << " dealing " << this->dmg << " damage";
+        << " dealing " << this->dmg << " damage.";
     
     enemy->take_damage(this->dmg);
     
     return msg.str();
 }
 
-void Pawn::take_damage(int dmg) {this->hp -= dmg;}
+bool Pawn::check_dead() {return(this->hp <= 0);}

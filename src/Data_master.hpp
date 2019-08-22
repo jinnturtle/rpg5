@@ -6,21 +6,26 @@
 #include "Pawn.hpp"
 #include "Floor_map.hpp"
 
+typedef std::vector<std::string> Message_log;
+
 // tabletop RPGs have a game master (aka. dungeon master), this is
 // the data master (your digital DM)
 class Data_master final {
 public:
-    void move_pawns(Direction player_input);
+    Data_master();
+    
+    void make_turn(Direction player_input);
     void add_pawn(Pawn* pawn);
     void set_floor_map(Floor_map* map);
     bool get_gameover();
-    std::vector<std::string*> get_messages(size_t n);
     
 private:
     std::vector<Pawn*> pawns;
-    std::vector<std::string> log; // TODO probably better to use a queue
+    Message_log log; // TODO use a deque?
     Floor_map* map;
+    int turn; // the current game turn
 
+    void move_pawns(Direction player_input);
     void update_pawns();
     void move_pawn(Pawn* pawn, Direction direction);
     void move_pawn(Pawn* pawn, int x, int y);
@@ -30,6 +35,7 @@ private:
     void add_message(const std::string& msg);
     
     friend class Viewport;
+    friend class Log_viewer;
 };
 
 #endif //#ifndef DATAMASTER_HPP

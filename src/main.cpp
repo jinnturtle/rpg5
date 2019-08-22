@@ -15,7 +15,6 @@ std::string gen_version();
 void gameover();
 void init_ncurses();
 void deinit_ncurses();
-void message_screen(Data_master* dm); // TODO this is temporary just for debugging
 
 int main() {
     init_ncurses();
@@ -23,12 +22,14 @@ int main() {
     Floor_map level;
     level.generate_test_level();
 
-    Pawn player("player", 5, 5, PLAYER, 0);
-    Pawn mob("mob", 10, 10, AI_BASIC, 1);
+    Pawn player("player", 5, 5, PLAYER, 0, 10, 10, 2);
+    Pawn mob("mob", 10, 10, AI_BASIC, 1, 3, 3, 1);
+    Pawn mob2("mob", 20, 10, AI_BASIC, 1, 3, 3, 1);
     
     Data_master dm;
     dm.add_pawn(&player);
     dm.add_pawn(&mob);
+    dm.add_pawn(&mob2);
     dm.set_floor_map(&level);
 
     Viewport viewport(0, 0, 80, 20);
@@ -36,7 +37,10 @@ int main() {
     Pawn_statsview player_statsview(0, 20, &player);
     Pawn_statsview mob_statsview(0, 21, &mob);
     
-    Ui ui(&viewport, &player_statsview);
+    Log_viewer log_view(0, 22, 80, 5);
+    log_view.attach_log(&dm);
+    
+    Ui ui(&viewport, &player_statsview, &log_view);
     
     // game loop
     int cmd {0};
@@ -48,27 +52,16 @@ int main() {
             case 'j': move_direction = SOUTH; break;
             case 'k': move_direction = NORTH; break;
             case 'l': move_direction = EAST; break;
-            case 'm': message_screen(&dm); break;
-            
-//             case 'w': --viewport.y; break;
-//             case 'a': --viewport.x; break;
-//             case 's': ++viewport.y; break;
-//             case 'd': ++viewport.x; break;
-//             case 'S': --viewport.h; break;
-//             case 'A': --viewport.w; break;
-//             case 'W': ++viewport.h; break;
-//             case 'D': ++viewport.w; break;
             default: break;
         }
         
-        dm.move_pawns(move_direction);
+        dm.make_turn(move_direction);
         if(dm.get_gameover()) {
             gameover();
             break;
         }
 
         ui.render();
-        mob_statsview.render();
 
         mvprintw(getmaxy(stdscr) - 1, 0, gen_version().c_str());
         cmd = getch();
@@ -124,16 +117,4 @@ void init_ncurses()
 void deinit_ncurses()
 {
     endwin();
-}
-
-void message_screen(Data_master* dm)
-{
-    std::vector<std::string*> messages = dm->get_messages(5);
-    
-    move(0, 0);
-    for(auto& message : messages) {
-        printw("%s\n", message->c_str());
-    }
-    
-    getch();
 }

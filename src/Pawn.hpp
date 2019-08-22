@@ -26,6 +26,7 @@ public:
     void move(Direction dir);
     void take_damage(int dmg);
     std::string attack(Pawn* enemy);
+    bool check_dead();
     
 private:
     Stats stats;

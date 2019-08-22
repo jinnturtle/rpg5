@@ -3,6 +3,18 @@
 #include <climits>
 #include <cmath>
 
+Data_master::Data_master()
+: map{nullptr}
+, turn{0}
+{
+}
+
+void Data_master::make_turn(Direction player_input)
+{
+    ++this->turn;
+    this->move_pawns(player_input);
+}
+
 void Data_master::move_pawns(Direction player_input)
 {
     for(auto& pawn : this->pawns) {
@@ -33,18 +45,6 @@ bool Data_master::get_gameover()
     }
     
     return true;
-}
-
-std::vector<std::string*> Data_master::get_messages(size_t n)
-{
-    std::vector<std::string*> messages;
-    
-    std::vector<std::string>::reverse_iterator ritr = this->log.rbegin();
-    for(size_t i{0}; i < this->log.size() && i < n; ++i) {
-        messages.push_back(&ritr[i]);
-    }
-    
-    return messages;
 }
 
 void Data_master::player_take_turn(Pawn* pawn, Direction player_input)
@@ -99,7 +99,7 @@ void Data_master::update_pawns()
 {
     for(size_t i {0}; i < this->pawns.size(); ++i) {
         // if pawn is dead, delete by overwrting with back and delete back
-        if(this->pawns[i]->hp == 0) {
+        if(this->pawns[i]->hp <= 0) {
             this->pawns[i] = this->pawns.back();
             this->pawns.pop_back();
         }
@@ -129,6 +129,9 @@ void Data_master::move_pawn(Pawn* pawn, int x, int y)
     if(tgt_pawn) {
         if(tgt_pawn != pawn && tgt_pawn->team != pawn->team) {
             std::string combat_msg = pawn->attack(tgt_pawn);
+            if(tgt_pawn->check_dead()) {
+                combat_msg += " The " + tgt_pawn->name + " expires.";
+            }
             this->add_message(combat_msg);
             return;
         }
@@ -146,5 +149,5 @@ void Data_master::move_pawn(Pawn* pawn, int x, int y)
 
 void Data_master::add_message(const std::string& msg)
 {
-    this->log.push_back(msg);
+    if(msg.size() > 0) {this->log.push_back(msg);}
 }

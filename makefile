@@ -6,16 +6,17 @@ SRC = $(SRC_DIR)/main.cpp
 INCLUDE = -I src
 LIBS = -lncurses
 OBJ_DIR = obj
-_OBJ = main.o \
-	   Floor_map.o \
-	   Pawn.o \
-	   Viewport.o \
-	   Tile.o \
-	   Data_master.o \
-	   Pawn_statsview.o \
-	   Log_viewer.o \
-	   Creatures.o \
-	   Ui.o
+SRC =      main.cpp \
+	   Floor_map.cpp \
+	   Pawn.cpp \
+	   Viewport.cpp \
+	   Tile.cpp \
+	   Data_master.cpp \
+	   Pawn_statsview.cpp \
+	   Log_viewer.cpp \
+	   Creatures.cpp \
+	   Ui.cpp
+_OBJ := $(SRC:%.cpp=%.o)
 OBJ = $(patsubst %, $(OBJ_DIR)/%, $(_OBJ))
 MAKEFILE = makefile
 

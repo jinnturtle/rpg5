@@ -133,8 +133,9 @@ void Data_master::move_pawn(Pawn* pawn, int x, int y)
                 combat_msg += " The " + tgt_pawn->name + " expires.";
             }
             this->add_message(combat_msg);
-            return;
         }
+        
+        return;
     }
     
     // see if the target coordinates are passable, and move there if so

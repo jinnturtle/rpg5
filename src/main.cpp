@@ -10,6 +10,7 @@
 //homebrew
 #include "Data_master.hpp"
 #include "Ui.hpp"
+#include "Creatures.hpp"
 
 std::string gen_version();
 void gameover();
@@ -22,9 +23,9 @@ int main() {
     Floor_map level;
     level.generate_test_level();
 
-    Pawn player("player", 5, 5, PLAYER, 0, 10, 10, 2);
-    Pawn mob("mob", 10, 10, AI_BASIC, 1, 3, 3, 1);
-    Pawn mob2("mob", 20, 10, AI_BASIC, 1, 3, 3, 1);
+    Human_pawn player(5, 5, PLAYER, 0, "player");
+    Goblin_pawn mob(10, 10);
+    Goblin_pawn mob2(20, 10);
     
     Data_master dm;
     dm.add_pawn(&player);
@@ -77,7 +78,7 @@ std::string gen_version()
     std::string name("prototype1");
     unsigned maj {0};
     unsigned med {0};
-    unsigned min {2};
+    unsigned min {4};
     bool wip {false};
 
     std::string suffix((wip)? "-WIP" : "");

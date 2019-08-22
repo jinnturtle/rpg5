@@ -7,7 +7,7 @@
 
 #include "Tile.hpp"
 
-class Floor_map {
+class Floor_map final {
 public:
     Floor_map();
     virtual ~Floor_map(){};

@@ -8,14 +8,14 @@ general idea.
 === v0.1 prototype1
 
 ==== v0.0.4 prototype1
-* [ ] creature types (2 for now -- human and goblin)
-* [ ] str-based damage
+* [x] creature types (2 for now -- human and goblin)
+* [x] str-based damage
 
 ==== v0.0.5 prototype1
-* [ ] random stats for spawned mobs (within mob type boundaries)
+* [ ] diceroll for damage calculation and (diceroll notation string interpretation) (str damage dict?)
 
 ==== v0.0.6 prototype1
-* [ ] diceroll for damage calculation and (diceroll notation string interpretation) (str damage dict?)
+* [ ] random stats for spawned mobs (within mob type boundaries)
 
 ==== v0.0.7 prototype1
 * [ ] enemy AI with A* pathfinding

@@ -14,6 +14,7 @@ _OBJ = main.o \
 	   Data_master.o \
 	   Pawn_statsview.o \
 	   Log_viewer.o \
+	   Creatures.o \
 	   Ui.o
 OBJ = $(patsubst %, $(OBJ_DIR)/%, $(_OBJ))
 MAKEFILE = makefile

@@ -3,7 +3,7 @@
 
 #include "Data_master.hpp"
 
-class Log_viewer {
+class Log_viewer final {
 public:
     Log_viewer(int x, int y, unsigned w, unsigned h, Data_master* dm = nullptr);
     

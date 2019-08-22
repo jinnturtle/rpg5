@@ -13,14 +13,14 @@ enum Pawn_controller {
 
 class Pawn {
     struct Stats {
-        int per;
         int str;
     };
     
 public:
-    Pawn(const std::string& name, int x, int y,
+    Pawn(int x, int y,
          Pawn_controller contr, int team,
-         int hp = 10, int hp_max = 10, int dmg = 1);
+         const std::string& name, 
+         int hp, int str);
     virtual ~Pawn(){};
 
     void move(Direction dir);
@@ -35,7 +35,8 @@ private:
     int team;
     int x, y;
     int hp, hp_max;
-    int dmg; //obsolete, should calculate based on str + weapon + effects, etc
+    
+    int calc_dmg();
 
     friend class Viewport;
     friend class Data_master;

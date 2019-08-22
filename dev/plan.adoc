@@ -6,12 +6,12 @@ milestone, the more susceptible to change it is, but it should represent the
 general idea.
 
 === v0.0.3 prototype1
-* [ ] str-based damage
-* [ ] diceroll for damage calculation
+* [x] a message/event log where flavour text, combat messages and similar things will be stored. 
+* [ ] the few most recent lines of this log should be visible on the main adventure screen
 
 === v0.0.4 prototype1
-* [ ] a message/event log where flavour text, combat messages and similar things will be stored. (e.g. _"goblin pokes at you with his spear, piercing your arm. Blood trickles down from the puncture wound"_, _"you swing at the goblin with your axe, separating his head clean off his shoulders."_, _"Goblin collapses in a pool of black-brown blood"_)
-* [ ] the few most recent lines of this log should be visible on the main adventure screen
+* [ ] str-based damage
+* [ ] diceroll for damage calculation
 
 === Very soon
 * creature types (2 for now -- human and mob)
@@ -68,6 +68,7 @@ This is subject to chane completely, as it is a result of brainstorming.
 *** blue amathea - mana, poison, water breathing
 *** black amathea - darkness, stealth, poison
 *** ghost amathea - stealth, walking through walls, health/vitae drain
+* more interesting combat messages (e.g. _"goblin pokes at you with his spear, piercing your arm. Blood trickles down from the puncture wound"_, _"you swing at the goblin with your axe, separating his head clean off his shoulders."_, _"Goblin collapses in a pool of black-brown blood"_)
 
 == Changelog
 

@@ -10,15 +10,15 @@
 // the data master (your digital DM)
 class Data_master final {
 public:
-    void set_player(Pawn* player);
     void move_pawns(Direction player_input);
     void add_pawn(Pawn* pawn);
     void set_floor_map(Floor_map* map);
     bool get_gameover();
+    std::vector<std::string*> get_messages(size_t n);
     
 private:
-    Pawn* player;
     std::vector<Pawn*> pawns;
+    std::vector<std::string> log; // TODO probably better to use a queue
     Floor_map* map;
 
     void update_pawns();
@@ -27,6 +27,7 @@ private:
     void player_take_turn(Pawn* pawn, Direction player_input);
     void ai_basic_take_turn(Pawn* pawn);
     Pawn* get_pawn_at(int x, int y);
+    void add_message(const std::string& msg);
     
     friend class Viewport;
 };

@@ -25,16 +25,16 @@ public:
 
     void move(Direction dir);
     void take_damage(int dmg);
-    void attack(Pawn* enemy);
+    std::string attack(Pawn* enemy);
     
 private:
+    Stats stats;
     std::string name;
     Pawn_controller controller;
     int team;
     int x, y;
     int hp, hp_max;
     int dmg; //obsolete, should calculate based on str + weapon + effects, etc
-    Stats stats;
 
     friend class Viewport;
     friend class Data_master;

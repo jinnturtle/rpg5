@@ -1,9 +1,12 @@
 #include "Pawn.hpp"
 
+#include <sstream>
+
 Pawn::Pawn(const std::string& name, int x, int y,
            Pawn_controller contr, int team,
            int hp, int hp_max, int dmg)
-: name{name}
+: stats{.per = 5, .str = 1}
+, name{name}
 , controller{contr}
 , team{team}
 , x{x}
@@ -11,7 +14,6 @@ Pawn::Pawn(const std::string& name, int x, int y,
 , hp{hp}
 , hp_max{hp_max}
 , dmg{dmg}
-, stats{.per = 5, .str = 1}
 {}
 
 void Pawn::move(Direction dir)
@@ -26,6 +28,14 @@ void Pawn::move(Direction dir)
     }
 }
 
-void Pawn::attack(Pawn* enemy) {enemy->take_damage(this->dmg);}
+std::string Pawn::attack(Pawn* enemy) {
+    std::stringstream msg;
+    msg << "The " << this->name << " attacks " << enemy->name
+        << " dealing " << this->dmg << " damage";
+    
+    enemy->take_damage(this->dmg);
+    
+    return msg.str();
+}
 
 void Pawn::take_damage(int dmg) {this->hp -= dmg;}

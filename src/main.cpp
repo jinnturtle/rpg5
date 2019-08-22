@@ -15,6 +15,7 @@ std::string gen_version();
 void gameover();
 void init_ncurses();
 void deinit_ncurses();
+void message_screen(Data_master* dm); // TODO this is temporary just for debugging
 
 int main() {
     init_ncurses();
@@ -47,6 +48,7 @@ int main() {
             case 'j': move_direction = SOUTH; break;
             case 'k': move_direction = NORTH; break;
             case 'l': move_direction = EAST; break;
+            case 'm': message_screen(&dm); break;
             
 //             case 'w': --viewport.y; break;
 //             case 'a': --viewport.x; break;
@@ -122,4 +124,16 @@ void init_ncurses()
 void deinit_ncurses()
 {
     endwin();
+}
+
+void message_screen(Data_master* dm)
+{
+    std::vector<std::string*> messages = dm->get_messages(5);
+    
+    move(0, 0);
+    for(auto& message : messages) {
+        printw("%s\n", message->c_str());
+    }
+    
+    getch();
 }

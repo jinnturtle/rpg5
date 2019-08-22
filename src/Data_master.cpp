@@ -35,6 +35,18 @@ bool Data_master::get_gameover()
     return true;
 }
 
+std::vector<std::string*> Data_master::get_messages(size_t n)
+{
+    std::vector<std::string*> messages;
+    
+    std::vector<std::string>::reverse_iterator ritr = this->log.rbegin();
+    for(size_t i{0}; i < this->log.size() && i < n; ++i) {
+        messages.push_back(&ritr[i]);
+    }
+    
+    return messages;
+}
+
 void Data_master::player_take_turn(Pawn* pawn, Direction player_input)
 {
     if(pawn->controller == PLAYER) {
@@ -116,7 +128,8 @@ void Data_master::move_pawn(Pawn* pawn, int x, int y)
     Pawn* tgt_pawn = this->get_pawn_at(x, y);
     if(tgt_pawn) {
         if(tgt_pawn != pawn && tgt_pawn->team != pawn->team) {
-            pawn->attack(tgt_pawn);
+            std::string combat_msg = pawn->attack(tgt_pawn);
+            this->add_message(combat_msg);
             return;
         }
     }
@@ -129,4 +142,9 @@ void Data_master::move_pawn(Pawn* pawn, int x, int y)
         pawn->x = x;
         pawn->y = y;
     }
+}
+
+void Data_master::add_message(const std::string& msg)
+{
+    this->log.push_back(msg);
 }

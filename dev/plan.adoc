@@ -3,27 +3,18 @@
 == Work-plan
 This should contain a couple of planned milestones, the further away the
 milestone, the more susceptible to change it is, but it should represent the
-general idea.
+general idea, probably.
 
 === v0.1 prototype1
-
-==== v0.0.4 prototype1
-* [x] creature types (2 for now -- human and goblin)
-* [x] str-based damage
-
-==== v0.0.5 prototype1
-* [ ] diceroll for damage calculation and (diceroll notation string interpretation) (str damage dict?)
 
 ==== v0.0.6 prototype1
 * [ ] random stats for spawned mobs (within mob type boundaries)
 
 ==== v0.0.7 prototype1
 * [ ] enemy AI with A* pathfinding
+
+==== v0.0.8 prototype1
 * [ ] add more detail to the test level
-
-==== Very soon (this version)
-
-==== Quite soon (maybe this version)
 
 === v0.2 prototype1
 
@@ -35,7 +26,9 @@ general idea.
 * chests
 * more enemies
 * going deeper (stairs down/up to other levels)
-* one type of level generation
+
+=== v0.3 prototype1
+* level generation
 
 === Planning rules of thumb
 All the changes should be cathegorhised into small iterations.
@@ -96,3 +89,12 @@ This is subject to chane completely, as it is a result of brainstorming.
 === v0.0.3 prototype1
 * [x] a message/event log where flavour text, combat messages and similar things will be stored. 
 * [x] a few most recent lines of this log should be visible on the main adventure screen
+
+==== v0.0.4 prototype1
+* [x] creature types (2 for now -- human and goblin)
+* [x] str-based damage
+
+==== v0.0.5 prototype1
+* [x] diceroll for damage calculation and (dice notation-string interpretation)
+** [x] str damage dict
+** [x] parser

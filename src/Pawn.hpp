@@ -13,20 +13,21 @@ enum Pawn_controller {
 
 class Pawn {
     struct Stats {
-        int str;
+        unsigned str;
     };
     
 public:
     Pawn(int x, int y,
          Pawn_controller contr, int team,
          const std::string& name, 
-         int hp, int str);
+         int hp, unsigned str);
     virtual ~Pawn(){};
 
     void move(Direction dir);
     void take_damage(int dmg);
-    std::string attack(Pawn* enemy);
     bool check_dead();
+//     int get_dmg_dice();
+    std::string get_dmg_dice();
     
 private:
     Stats stats;
@@ -36,8 +37,6 @@ private:
     int x, y;
     int hp, hp_max;
     
-    int calc_dmg();
-
     friend class Viewport;
     friend class Data_master;
     friend class Pawn_statsview;

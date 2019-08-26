@@ -5,6 +5,7 @@
 
 #include "Pawn.hpp"
 #include "Floor_map.hpp"
+#include "dice_roll.hpp"
 
 typedef std::vector<std::string> Message_log;
 
@@ -27,11 +28,12 @@ private:
 
     void move_pawns(Direction player_input);
     void update_pawns();
-    void move_pawn(Pawn* pawn, Direction direction);
-    void move_pawn(Pawn* pawn, int x, int y);
     void player_take_turn(Pawn* pawn, Direction player_input);
     void ai_basic_take_turn(Pawn* pawn);
     Pawn* get_pawn_at(int x, int y);
+    void move_pawn(Pawn* pawn, Direction direction);
+    void move_pawn(Pawn* pawn, int x, int y);
+    void pawn_attack(Pawn* attacker, Pawn* target);
     void add_message(const std::string& msg);
     
     friend class Viewport;

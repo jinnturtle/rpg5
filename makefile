@@ -15,7 +15,8 @@ SRC =      main.cpp \
 	   Pawn_statsview.cpp \
 	   Log_viewer.cpp \
 	   Creatures.cpp \
-	   Ui.cpp
+	   Ui.cpp \
+	   dice_roll.cpp
 _OBJ := $(SRC:%.cpp=%.o)
 OBJ = $(patsubst %, $(OBJ_DIR)/%, $(_OBJ))
 MAKEFILE = makefile

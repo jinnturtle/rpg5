@@ -90,11 +90,11 @@ This is subject to chane completely, as it is a result of brainstorming.
 * [x] a message/event log where flavour text, combat messages and similar things will be stored. 
 * [x] a few most recent lines of this log should be visible on the main adventure screen
 
-==== v0.0.4 prototype1
+=== v0.0.4 prototype1
 * [x] creature types (2 for now -- human and goblin)
 * [x] str-based damage
 
-==== v0.0.5 prototype1
+=== v0.0.5 prototype1
 * [x] diceroll for damage calculation and (dice notation-string interpretation)
 ** [x] str damage dict
 ** [x] parser

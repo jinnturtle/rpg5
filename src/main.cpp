@@ -78,7 +78,7 @@ std::string gen_version()
     std::string name("prototype1");
     unsigned maj {0};
     unsigned med {0};
-    unsigned min {4};
+    unsigned min {5};
     bool wip {false};
 
     std::string suffix((wip)? "-WIP" : "");

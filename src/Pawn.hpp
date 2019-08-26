@@ -26,7 +26,6 @@ public:
     void move(Direction dir);
     void take_damage(int dmg);
     bool check_dead();
-//     int get_dmg_dice();
     std::string get_dmg_dice();
     
 private:

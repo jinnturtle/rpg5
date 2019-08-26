@@ -57,18 +57,6 @@ void Pawn::take_damage(int dmg) {this->hp -= dmg;}
 
 bool Pawn::check_dead() {return(this->hp <= 0);}
 
-// int Pawn::get_dmg_dice()
-// {
-    // TODO - when dice string parsing is done
-//     if(this->stats.str < str_dmg_ref.size()) {
-//         return str_dmg_ref[this->stats.str];
-//     } else {
-//         return str_dmg_ref.end();
-//     }
-    
-//     return this->stats.str / 5;
-// }
-
 std::string Pawn::get_dmg_dice()
 {
     if(this->stats.str < str_dmg_ref.size()) {

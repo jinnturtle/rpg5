@@ -25,6 +25,7 @@ private:
     Message_log log; // TODO use a deque?
     Floor_map* map;
     int turn; // the current game turn
+    Randomizer rand;
 
     void move_pawns(Direction player_input);
     void update_pawns();

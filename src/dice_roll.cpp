@@ -1,31 +1,22 @@
 #include "dice_roll.hpp"
 
-#include <random>
 #include <array>
 
-struct Dicethrow_data {
-    unsigned ammount;
-    unsigned sides;
-    char modifier;
-    unsigned mod_argument;
-};
+Randomizer::Randomizer()
+: rng{std::mt19937(this->dev())}
+{}
 
-Dicethrow_data parse_dice_string(const std::string& dice_str);
-
-int roll_dice(std::string dice_str)
+int Randomizer::roll_dice(const std::string& dice_str)
 {    
-    auto d = parse_dice_string(dice_str);
+    auto d = this->parse_dice_string(dice_str);
     
-    // set up number randomization
-    std::random_device dev;
-    std::mt19937 rng(dev());
     std::uniform_int_distribution<std::mt19937::result_type> dist(1, d.sides);
     
     // roll the dice
     int sum {0};
     if(d.sides != 0) {
         for(size_t i {0}; i < d.ammount; ++i) {
-            sum += dist(rng);
+            sum += dist(this->rng);
         }
     }
     
@@ -46,7 +37,7 @@ int roll_dice(std::string dice_str)
     return result;
 }
 
-Dicethrow_data parse_dice_string(const std::string& dice_str)
+Randomizer::Dicethrow_data Randomizer::parse_dice_string(const std::string& dice_str)
 {
     Dicethrow_data d{
         .ammount = 0,

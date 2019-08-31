@@ -151,7 +151,7 @@ void Data_master::move_pawn(Pawn* pawn, int x, int y)
 
 void Data_master::pawn_attack(Pawn* attacker, Pawn* target)
 {
-    int dmg{roll_dice(attacker->get_dmg_dice())};
+    int dmg{this->rand.roll_dice(attacker->get_dmg_dice())};
     if(dmg < 0) {dmg = 0;} // no unintentionally healing attacks
     // int dmg{attacker->get_dmg_dice()};
     

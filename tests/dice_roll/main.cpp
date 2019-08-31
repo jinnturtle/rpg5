@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include "../../src/dice_roll.cpp"
+#include "../../src/Randomizer.cpp"
 
 int main()
 {
@@ -18,13 +18,16 @@ int main()
         "1d2 * 5",
         "1d10 / 5",
     };
+    
+    Randomizer rand;
 
     size_t reps {20};
 
     for(auto& roll_data : test_strings) {
         std::cout << "test: " << roll_data << std::endl;
         for(size_t i {0}; i < reps; ++i) {
-            std::cout << "\t" << i << ": " << roll_dice(roll_data) << std::endl;
+            std::cout << "\t" << i << ": "
+            << rand.roll_dice(roll_data) << std::endl;
         }
     }
 

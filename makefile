@@ -16,7 +16,7 @@ SRC =      main.cpp \
 	   Log_viewer.cpp \
 	   Creatures.cpp \
 	   Ui.cpp \
-	   dice_roll.cpp
+	   Randomizer.cpp
 _OBJ := $(SRC:%.cpp=%.o)
 OBJ = $(patsubst %, $(OBJ_DIR)/%, $(_OBJ))
 MAKEFILE = makefile

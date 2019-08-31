@@ -1,4 +1,4 @@
-#include "dice_roll.hpp"
+#include "Randomizer.hpp"
 
 #include <array>
 
@@ -35,6 +35,19 @@ int Randomizer::roll_dice(const std::string& dice_str)
     }
     
     return result;
+}
+
+int Randomizer::roll_in_range(int min, int max)
+{
+    // TODO implement a swap function that does not use an intermediary buffer
+    if(min > max) {
+        int sav_min = min;
+        min = max;
+        max = sav_min;
+    }
+    std::uniform_int_distribution<std::mt19937::result_type> dist(min, max);
+    
+    return dist(this->rng);
 }
 
 Randomizer::Dicethrow_data Randomizer::parse_dice_string(const std::string& dice_str)

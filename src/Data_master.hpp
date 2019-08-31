@@ -5,7 +5,7 @@
 
 #include "Pawn.hpp"
 #include "Floor_map.hpp"
-#include "dice_roll.hpp"
+#include "Randomizer.hpp"
 
 typedef std::vector<std::string> Message_log;
 

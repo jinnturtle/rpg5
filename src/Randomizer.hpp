@@ -1,5 +1,5 @@
-#ifndef DICE_ROLL_CPP
-#define DICE_ROLL_CPP
+#ifndef RANDOMIZER_HPP
+#define RANDOMIZER_HPP
 
 #include <string>
 #include <random>
@@ -9,6 +9,7 @@ public:
     Randomizer();
     
     int roll_dice(const std::string& dice_str);
+    int roll_in_range(int min, int max);
     
 private:
     struct Dicethrow_data {
@@ -24,4 +25,4 @@ private:
     Dicethrow_data parse_dice_string(const std::string& dice_str);
 };
 
-#endif //define DICE_ROLL_CPP
+#endif //ifndef RANDOMIZER_HPP

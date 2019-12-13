@@ -7,13 +7,13 @@ general idea, probably.
 
 === v0.1 prototype1
 
-==== v0.0.6 prototype1
+==== v0.0.7 prototype1
 * [ ] random stats for spawned mobs (within mob type boundaries)
 
-==== v0.0.7 prototype1
+==== v0.0.8 prototype1
 * [ ] enemy AI with A* pathfinding
 
-==== v0.0.8 prototype1
+==== v0.0.9 prototype1
 * [ ] add more detail to the test level
 
 === v0.2 prototype1
@@ -43,6 +43,7 @@ The definition of "complete" will be decided at a later date.
 == Unsorted features/feature ideas
 This is subject to chane completely, as it is a result of brainstorming.
 
+* UI: display general stats of last hit mob e.g. type/name, health
 * doors
 * barring doors, bashing down doors, enemies bash down doors
 * locking doors, picking locks (on doors and chests and etc.)
@@ -98,3 +99,6 @@ This is subject to chane completely, as it is a result of brainstorming.
 * [x] diceroll for damage calculation and (dice notation-string interpretation)
 ** [x] str damage dict
 ** [x] parser
+
+==== v0.0.6 prototype1
+* [x] show short stats of target i.e. last attacked mob

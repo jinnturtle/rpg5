@@ -20,7 +20,7 @@ void Log_viewer::attach_log(Data_master* dm) {this->log = &dm->log;}
 void Log_viewer::render()
 {
     if(this->log == nullptr) {return;} // TODO log warning
-    
+
     Message_log::reverse_iterator ritr;
     ritr = this->log->rbegin();
     for(size_t i{0}; i < h && i < this->log->size(); ++i) {

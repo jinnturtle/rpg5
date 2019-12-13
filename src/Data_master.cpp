@@ -25,7 +25,7 @@ void Data_master::move_pawns(Direction player_input)
             default: break;
         }
     }
-    
+
     this->update_pawns();
 }
 
@@ -44,7 +44,7 @@ bool Data_master::get_gameover()
     for(auto& pawn : this->pawns) {
         if(pawn->controller == PLAYER) {return false;}
     }
-    
+
     return true;
 }
 
@@ -58,13 +58,13 @@ void Data_master::player_take_turn(Pawn* pawn, Direction player_input)
 void Data_master::ai_basic_take_turn(Pawn* pawn)
 {
     // this AI biscally moves to the closes non-friendly pawn and attacks it
-    
+
     int closest_dist {INT_MAX};
     Pawn* closest_enemy {nullptr};
     for(auto& other_pawn : this->pawns) {
         // skip team-mates
         if(other_pawn->team == pawn->team) {continue;}
-        
+
         int dist_x {abs(other_pawn->x - pawn->x)};
         int dist_y {abs(other_pawn->y - pawn->y)};
         int distance {dist_x + dist_y};
@@ -73,7 +73,7 @@ void Data_master::ai_basic_take_turn(Pawn* pawn)
             closest_enemy = other_pawn;
         }
     }
-    
+
     //decide movement direction to get closer if were not close enough
     Direction direction{NONE};
     if(closest_enemy) {
@@ -92,7 +92,7 @@ Pawn* Data_master::get_pawn_at(int x, int y)
             return pawn;
         }
     }
-    
+
     return nullptr;
 }
 
@@ -111,7 +111,7 @@ void Data_master::move_pawn(Pawn* pawn, Direction direction)
 {
     int tgt_x = pawn->x;
     int tgt_y = pawn->y;
-    
+
     switch(direction) {
         case NORTH: --tgt_y; break;
         case EAST: ++tgt_x; break;
@@ -119,7 +119,7 @@ void Data_master::move_pawn(Pawn* pawn, Direction direction)
         case WEST: --tgt_x; break;
         default: break;
     }
-    
+
     this->move_pawn(pawn, tgt_x, tgt_y);
 }
 
@@ -128,21 +128,21 @@ void Data_master::move_pawn(Pawn* pawn, int x, int y)
     // dead pawns should not move (and retaliate after death)
     // the undead state is a different thing
     if(pawn->check_dead()) {return;}
-    
+
     // check if there is a creature at target location, attack if so
     Pawn* tgt_pawn = this->get_pawn_at(x, y);
     if(tgt_pawn) {
         if(tgt_pawn != pawn && tgt_pawn->team != pawn->team) {
             pawn_attack(pawn, tgt_pawn);
         }
-        
+
         return;
     }
-    
+
     // see if the target coordinates are passable, and move there if so
     Tile* tgt_tile = this->map->get_tile(x, y);
     if(tgt_tile == nullptr) {return;}
-    
+
     if(tgt_tile->get_type() != WALL) {
         pawn->x = x;
         pawn->y = y;
@@ -151,12 +151,14 @@ void Data_master::move_pawn(Pawn* pawn, int x, int y)
 
 void Data_master::pawn_attack(Pawn* attacker, Pawn* target)
 {
+    attacker->last_attacked = target;
+
     int dmg{this->rand.roll_dice(attacker->get_dmg_dice())};
     if(dmg < 0) {dmg = 0;} // no unintentionally healing attacks
     // int dmg{attacker->get_dmg_dice()};
-    
+
     target->take_damage(dmg);
-    
+
     std::stringstream msg;
     msg << attacker->name << " attacks " << target->name
         << " for " << dmg << " damage.";

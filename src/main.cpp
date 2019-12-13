@@ -26,7 +26,7 @@ int main() {
     Human_pawn player(5, 5, PLAYER, 0, "player");
     Goblin_pawn mob(10, 10);
     Goblin_pawn mob2(20, 10);
-    
+
     Data_master dm;
     dm.add_pawn(&player);
     dm.add_pawn(&mob);
@@ -37,12 +37,12 @@ int main() {
     viewport.attach_dm(&dm);
     Pawn_statsview player_statsview(0, 20, &player);
     Pawn_statsview mob_statsview(0, 21, &mob);
-    
+
     Log_viewer log_view(0, 22, 80, 5);
     log_view.attach_log(&dm);
-    
+
     Ui ui(&viewport, &player_statsview, &log_view);
-    
+
     // game loop
     int cmd {0};
     while(cmd != 'q') {
@@ -55,7 +55,7 @@ int main() {
             case 'l': move_direction = EAST; break;
             default: break;
         }
-        
+
         dm.make_turn(move_direction);
         if(dm.get_gameover()) {
             gameover();
@@ -78,28 +78,28 @@ std::string gen_version()
     std::string name("prototype1");
     unsigned maj {0};
     unsigned med {0};
-    unsigned min {5};
+    unsigned min {6};
     bool wip {false};
 
     std::string suffix((wip)? "-WIP" : "");
-    
+
     std::stringstream ssbuf;
     ssbuf << "v" << maj << "." << med << "." << min << "-" << name << suffix;
-    
+
     return ssbuf.str();
 }
 
 void gameover()
 {
     std::stringstream buf;
-    
+
     buf << "Alas our hero has fallen." << std::endl
         << "This draws our story to a close." << std::endl
         << std::endl
         << "But there are more stroies." << std::endl;
-        
+
     mvprintw(0, 0, buf.str().c_str());
-    
+
     // wait for player input
     printw("\n\npress any key...");
     getch();

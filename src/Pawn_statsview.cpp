@@ -20,7 +20,7 @@ void Pawn_statsview::render()
     std::stringstream linebuff;
 
     linebuff << this->pawn->name << "> "
-    << "HP: " << this->pawn->hp << "/" << this->pawn->hp_max;
+    << "HP: " << this->pawn->hp << "/" << this->pawn->stats.max_hp;
     mvprintw(pos_y, pos_x, linebuff.str().c_str());
 
     if(this->pawn->last_attacked) {

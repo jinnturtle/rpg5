@@ -96,7 +96,8 @@ void gameover()
     buf << "Alas our hero has fallen." << std::endl
         << "This draws our story to a close." << std::endl
         << std::endl
-        << "But there are more stroies." << std::endl;
+        << "Everything that has a beginning must have an end." << std::endl
+        << "But every end is also a beginning." << std::endl;
 
     mvprintw(0, 0, buf.str().c_str());
 

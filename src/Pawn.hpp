@@ -12,8 +12,10 @@ enum Pawn_controller {
 };
 
 class Pawn {
+    // TODO - include max_hp here
     struct Stats {
-        unsigned str;
+        int str;
+        int max_hp;
     };
 
 public:
@@ -22,7 +24,9 @@ public:
          int team,
          const std::string& name,
          int hp,
-         unsigned str);
+         int str,
+         unsigned stat_variation = 20 /* stat variation percentage */
+        );
     virtual ~Pawn(){};
 
     void move(Direction dir);
@@ -38,7 +42,7 @@ private:
     Pawn_controller controller;
     int team;
     int x, y;
-    int hp, hp_max;
+    int hp;
 
     Pawn* last_attacked; // the pawn that was last attacked by this one
 

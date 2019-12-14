@@ -3,6 +3,8 @@
 #include <sstream>
 #include <array>
 
+#include "Randomizer.hpp"
+
 // strength to damage conversion table
 // TODO - later move to weapon class and make hand as one of weapons, as some
 // creatures don't have hands and will use other conversions from strength
@@ -36,17 +38,24 @@ Pawn::Pawn(int x, int y,
            int team,
            const std::string& name,
            int hp,
-           unsigned str)
-: stats{.str = str}
+           int str,
+           unsigned stat_variation
+          )
+: stats{0, 0}
 , name{name}
 , controller{contr}
 , team{team}
 , x{x}
 , y{y}
-, hp{hp}
-, hp_max{this->hp}
+, hp{0}
 , last_attacked{nullptr}
-{}
+{
+    // TODO - randomize stats within percentage passed in stat_variation
+    this->stats.max_hp = hp;
+    this->stats.str = str;
+
+    this->hp = this->stats.max_hp;
+}
 
 void Pawn::move(Direction dir)
 {
@@ -64,11 +73,16 @@ void Pawn::take_damage(int dmg) {this->hp -= dmg;}
 
 bool Pawn::check_dead() {return(this->hp <= 0);}
 
+// get dmg dice string that corresponds to strength
 std::string Pawn::get_dmg_dice()
 {
-    if(this->stats.str < str_dmg_ref.size()) {
-        return str_dmg_ref[this->stats.str];
+    size_t str_idx {
+        (this->stats.str < 0)? 0 : static_cast<size_t>(this->stats.str)};
+
+    if(str_idx < str_dmg_ref.size()) {
+        return str_dmg_ref[str_idx];
     } else {
+        // off the charts! return the biggest one we've got
         return str_dmg_ref.back();
     }
 }
@@ -101,5 +115,5 @@ std::string Pawn::get_rough_health()
 // get percent of health remaining
 int Pawn::get_health_perc()
 {
-    return 100 * this->hp / this->hp_max;
+    return 100 * this->hp / this->stats.max_hp;
 }

@@ -8,7 +8,9 @@ general idea, probably.
 === v0.1 prototype1
 
 ==== v0.0.7 prototype1
-* [ ] random stats for spawned mobs (within mob type boundaries)
+* [x] random stats for spawned mobs
+** [ ] remove randomization logic from Pawn class and implement a Pawn_spawner
+   move randomization logic to there
 
 ==== v0.0.8 prototype1
 * [ ] enemy AI with A* pathfinding

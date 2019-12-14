@@ -4,6 +4,7 @@
 #include <string>
 
 #include "world.hpp"
+#include "Randomizer.hpp"
 
 enum Pawn_controller {
     PLAYER = 0,
@@ -25,7 +26,8 @@ public:
          const std::string& name,
          int hp,
          int str,
-         unsigned stat_variation = 20 /* stat variation percentage */
+         Randomizer* rand = nullptr,
+         int stat_variation = 20 /* stat variation percentage */
         );
     virtual ~Pawn(){};
 

@@ -23,9 +23,10 @@ int main() {
     Floor_map level;
     level.generate_test_level();
 
-    Human_pawn player(5, 5, PLAYER, 0, "player");
-    Goblin_pawn mob(10, 10);
-    Goblin_pawn mob2(20, 10);
+    Randomizer rand;
+    Human_pawn player(5, 5, &rand, PLAYER, 0, "player");
+    Goblin_pawn mob(10, 10, &rand);
+    Goblin_pawn mob2(20, 10, &rand);
 
     Data_master dm;
     dm.add_pawn(&player);

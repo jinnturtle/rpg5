@@ -153,7 +153,9 @@ void Data_master::pawn_attack(Pawn* attacker, Pawn* target)
 {
     attacker->last_attacked = target;
 
-    int dmg{this->rand.roll_dice(attacker->get_dmg_dice())};
+    const std::string dmg_str {attacker->get_dmg_dice()};
+
+    int dmg{this->rand.roll_dice(dmg_str)};
     if(dmg < 0) {dmg = 0;} // no unintentionally healing attacks
     // int dmg{attacker->get_dmg_dice()};
 
@@ -161,7 +163,7 @@ void Data_master::pawn_attack(Pawn* attacker, Pawn* target)
 
     std::stringstream msg;
     msg << attacker->name << " attacks " << target->name
-        << " for " << dmg << " damage.";
+        << " for " << dmg << " (" << dmg_str << ") damage.";
     if(target->check_dead()) {
         msg << " " << target->name << " expires.";
     }

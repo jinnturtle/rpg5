@@ -6,7 +6,9 @@
 class Human_pawn : public Pawn {
 public:
     Human_pawn(int x, int y,
-               Pawn_controller contr = AI_BASIC, int team = 1,
+               Randomizer* rand,
+               Pawn_controller contr = AI_BASIC,
+               int team = 1,
                const std::string& name = "human");
     virtual ~Human_pawn(){}
 };
@@ -14,7 +16,9 @@ public:
 class Goblin_pawn : public Pawn {
 public:
     Goblin_pawn(int x, int y,
-               Pawn_controller contr = AI_BASIC, int team = 1,
+               Randomizer* rand = nullptr,
+               Pawn_controller contr = AI_BASIC,
+               int team = 1,
                const std::string& name = "goblin");
     virtual ~Goblin_pawn(){}
 };

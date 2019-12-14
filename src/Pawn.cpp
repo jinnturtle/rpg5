@@ -3,8 +3,6 @@
 #include <sstream>
 #include <array>
 
-#include "Randomizer.hpp"
-
 // strength to damage conversion table
 // TODO - later move to weapon class and make hand as one of weapons, as some
 // creatures don't have hands and will use other conversions from strength
@@ -39,7 +37,8 @@ Pawn::Pawn(int x, int y,
            const std::string& name,
            int hp,
            int str,
-           unsigned stat_variation
+           Randomizer* rand,
+           int stat_variation
           )
 : stats{0, 0}
 , name{name}
@@ -50,9 +49,26 @@ Pawn::Pawn(int x, int y,
 , hp{0}
 , last_attacked{nullptr}
 {
-    // TODO - randomize stats within percentage passed in stat_variation
     this->stats.max_hp = hp;
     this->stats.str = str;
+
+    // randomize the stats
+    /* TODO - rethink: likely should remove from class altogether
+    * and implement in Pawn_spawner class */
+    if(rand) {
+        int* stats[] {
+            &this->stats.max_hp,
+            &this->stats.str,
+        };
+
+        constexpr int percent {100}; // e.g. percent = 100, permille = 1000
+        for(int* stat : stats) {
+            // how far the stat can be modified one way (add or sub)
+            int half_range {*stat * stat_variation / percent};
+
+            *stat += rand->roll_in_range(-half_range, half_range);
+        }
+    }
 
     this->hp = this->stats.max_hp;
 }
